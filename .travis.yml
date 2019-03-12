@@ -20,7 +20,7 @@ jobs:
         - echo "$variable1"
         -  mysql -e 'show databases;'
         -  mysql -e 'use test;'
-        -  mysql -e 'show tables;'
+       
        
 after_script:
  - echo " after script message"
