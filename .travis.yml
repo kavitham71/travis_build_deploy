@@ -1,0 +1,38 @@
+language: java
+dist: xenial
+
+services:
+   - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  # - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('new_password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  # - sudo mysql_upgrade -u root -pnew_password
+  # - sudo service mysql restart
+
+jobs:
+  include:
+    - stage: Tests
+      name: "test1"
+      script: 
+        - echo "Running unit tests (1)"  
+        - echo $a
+        - echo "$a"
+        - echo "$variable1"
+        -  mysql -e 'show databases;'
+        -  mysql -e 'use test;'
+        -  mysql -e 'show tables;'
+       
+after_script:
+ - echo " after script message"
+
+after_success:
+ - echo  " success msg"
+after_failure:
+ - echo " this is wrong"
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
