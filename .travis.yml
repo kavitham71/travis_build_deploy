@@ -30,9 +30,8 @@ after_success:
 after_failure:
  - echo " this is wrong"
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
+  provider: script
+  script: bash scripts/deploy.sh
   on:
-    branch: master
+    branch: develop
+
