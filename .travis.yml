@@ -29,10 +29,9 @@ after_success:
  - echo  " success msg"
 after_failure:
  - echo " this is wrong"
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  on:
-    branch: master
+notifications:
+  email:
+    recipients:
+      - tweetatkavi7@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
